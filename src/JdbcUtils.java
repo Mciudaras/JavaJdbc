@@ -70,4 +70,17 @@ public class JdbcUtils {
             e.printStackTrace();
         }
     }
+    public static boolean isTableExist(Connection connection, String tableName){
+        boolean tableExist = false;
+        try {
+            DatabaseMetaData data = connection.getMetaData();
+            ResultSet resultSet = data.getTables(null, null, tableName, null);
+
+            tableExist = resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tableExist;
+    }
 }
